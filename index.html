@@ -21,14 +21,6 @@
           <polyline points="2 12 12 17 22 12"></polyline>
         </svg>
       </button>
-      <button id="btn-measure" class="toolbar-btn" title="Measure">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="2" y1="22" x2="22" y2="2"></line>
-          <line x1="7" y1="22" x2="7" y2="19"></line>
-          <line x1="12" y1="22" x2="12" y2="16"></line>
-          <line x1="17" y1="22" x2="17" y2="19"></line>
-        </svg>
-      </button>
       <button id="btn-export" class="toolbar-btn" title="Export">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -42,6 +34,13 @@
           <path d="M21 3v5h-5"></path>
           <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
           <path d="M3 21v-5h5"></path>
+        </svg>
+      </button>
+      <button id="btn-help" class="toolbar-btn" title="Help (H)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
         </svg>
       </button>
     </div>
@@ -79,33 +78,6 @@
     </div>
   </div>
 
-  <!-- Measurement Panel -->
-  <div id="measure-panel" class="panel hidden">
-    <div class="panel-header">
-      <h3>Measurement</h3>
-      <button class="close-btn">&times;</button>
-    </div>
-    <div class="panel-content">
-      <div class="measure-controls">
-        <button id="measure-distance" class="measure-btn active">Distance</button>
-        <div class="unit-toggle">
-          <label>
-            <input type="radio" name="units" value="metric" checked>
-            <span>Metric</span>
-          </label>
-          <label>
-            <input type="radio" name="units" value="imperial">
-            <span>Imperial</span>
-          </label>
-        </div>
-      </div>
-      <div id="measure-result" class="measure-result">
-        <p>Click two points to measure distance</p>
-      </div>
-      <button id="clear-measurements" class="small-btn">Clear</button>
-    </div>
-  </div>
-
   <!-- Export Panel -->
   <div id="export-panel" class="panel hidden">
     <div class="panel-header">
@@ -114,7 +86,84 @@
     </div>
     <div class="panel-content">
       <button id="export-png" class="export-btn">Export as PNG</button>
+      <button id="export-png-transparent" class="export-btn">Export PNG (Transparent)</button>
+      <button id="export-svg" class="export-btn">Export as SVG</button>
       <button id="export-print" class="export-btn">Print</button>
+    </div>
+  </div>
+
+  <!-- Help Overlay -->
+  <div id="help-overlay" class="help-overlay hidden">
+    <div class="help-content">
+      <div class="help-header">
+        <h2>Keyboard Shortcuts & Help</h2>
+        <button class="help-close-btn">&times;</button>
+      </div>
+      <div class="help-body">
+        <div class="help-section">
+          <h3>Navigation</h3>
+          <div class="shortcut-item">
+            <kbd>Left Mouse</kbd>
+            <span>Rotate view</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Right Mouse</kbd>
+            <span>Pan view</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Scroll Wheel</kbd>
+            <span>Zoom in/out</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>F</kbd> or <kbd>R</kbd>
+            <span>Fit view / Reset camera</span>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3>Panels</h3>
+          <div class="shortcut-item">
+            <kbd>L</kbd>
+            <span>Toggle Layers panel</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>E</kbd>
+            <span>Toggle Export panel</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Esc</kbd>
+            <span>Close all panels</span>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3>Other</h3>
+          <div class="shortcut-item">
+            <kbd>H</kbd> or <kbd>?</kbd>
+            <span>Toggle this help</span>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3>Touch Gestures (Mobile)</h3>
+          <div class="shortcut-item">
+            <span class="touch-icon">👆</span>
+            <span>One finger drag to rotate</span>
+          </div>
+          <div class="shortcut-item">
+            <span class="touch-icon">✌️</span>
+            <span>Two finger pinch to zoom</span>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3>ViewCube</h3>
+          <p class="help-description">
+            Click on any face of the ViewCube (bottom-right corner) to snap to that orthographic view.
+            You can also drag the ViewCube to reposition it anywhere on screen.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
