@@ -1,0 +1,463 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --border-color: #dee2e6;
+  --hover-color: #e9ecef;
+  --active-color: #0d6efd;
+  --panel-bg: rgba(255, 255, 255, 0.95);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Viewer */
+#viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  z-index: 1;
+}
+
+/* Drop Zone */
+.drop-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 249, 250, 0.98);
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.drop-zone.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drop-zone.drag-over {
+  background: rgba(13, 110, 253, 0.1);
+  border: 3px dashed var(--active-color);
+}
+
+.drop-content {
+  text-align: center;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.drop-content svg {
+  color: var(--active-color);
+  margin-bottom: 1rem;
+}
+
+.drop-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.drop-content p {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Toolbar */
+#toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 100;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toolbar-left h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+#file-name {
+  color: #6c757d;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.toolbar-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toolbar-btn {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.toolbar-btn:hover {
+  background: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+.toolbar-btn.active {
+  background: var(--active-color);
+  color: white;
+  border-color: var(--active-color);
+}
+
+.toolbar-btn.active svg {
+  stroke: white;
+}
+
+/* Panels */
+.panel {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 280px;
+  max-height: calc(100vh - 100px);
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  z-index: 50;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel.hidden {
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.panel-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: var(--hover-color);
+}
+
+.panel-content {
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.panel-controls {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Layers Panel */
+.layers-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.layer-item:hover {
+  background: var(--hover-color);
+}
+
+.layer-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.layer-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid var(--border-color);
+}
+
+.layer-name {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.placeholder {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Measurement Panel */
+.measure-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.measure-btn {
+  padding: 0.6rem 1rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.measure-btn:hover {
+  background: var(--hover-color);
+}
+
+.measure-btn.active {
+  background: var(--active-color);
+  color: white;
+  border-color: var(--active-color);
+}
+
+.unit-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.unit-toggle label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.unit-toggle input[type="radio"] {
+  cursor: pointer;
+}
+
+.measure-result {
+  background: var(--hover-color);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  min-height: 60px;
+}
+
+.measure-result p {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.measure-result .value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-top: 0.5rem;
+}
+
+/* Export Panel */
+.export-btn {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  background: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+/* Small Buttons */
+.small-btn {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.small-btn:hover {
+  background: var(--hover-color);
+}
+
+/* Loading Indicator */
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 200;
+  background: var(--panel-bg);
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.loading.hidden {
+  display: none;
+}
+
+.spinner {
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--active-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading p {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+/* ViewCube */
+#view-cube {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#view-cube:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.02);
+}
+
+#view-cube canvas {
+  display: block;
+  border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .panel {
+    width: calc(100% - 40px);
+    right: 20px;
+  }
+
+  .toolbar-left h1 {
+    font-size: 1rem;
+  }
+
+  #file-name {
+    display: none;
+  }
+}

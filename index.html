@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DXF Viewer</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <!-- Top Toolbar -->
+  <div id="toolbar">
+    <div class="toolbar-left">
+      <h1>DXF Viewer</h1>
+      <span id="file-name"></span>
+    </div>
+    <div class="toolbar-right">
+      <button id="btn-layers" class="toolbar-btn" title="Layers">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </button>
+      <button id="btn-measure" class="toolbar-btn" title="Measure">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="2" y1="22" x2="22" y2="2"></line>
+          <line x1="7" y1="22" x2="7" y2="19"></line>
+          <line x1="12" y1="22" x2="12" y2="16"></line>
+          <line x1="17" y1="22" x2="17" y2="19"></line>
+        </svg>
+      </button>
+      <button id="btn-export" class="toolbar-btn" title="Export">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </button>
+      <button id="btn-reset" class="toolbar-btn" title="Reset View">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+          <path d="M21 3v5h-5"></path>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+          <path d="M3 21v-5h5"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Viewer Container -->
+  <div id="viewer"></div>
+
+  <!-- Drag and Drop Overlay -->
+  <div id="drop-zone" class="drop-zone">
+    <div class="drop-content">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+      <h2>Drop DXF File Here</h2>
+      <p>or click to browse</p>
+      <input type="file" id="file-input" accept=".dxf" hidden>
+    </div>
+  </div>
+
+  <!-- Layers Panel -->
+  <div id="layers-panel" class="panel hidden">
+    <div class="panel-header">
+      <h3>Layers</h3>
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="panel-controls">
+      <button id="show-all-layers" class="small-btn">Show All</button>
+      <button id="hide-all-layers" class="small-btn">Hide All</button>
+    </div>
+    <div id="layers-list" class="layers-list">
+      <p class="placeholder">No layers loaded</p>
+    </div>
+  </div>
+
+  <!-- Measurement Panel -->
+  <div id="measure-panel" class="panel hidden">
+    <div class="panel-header">
+      <h3>Measurement</h3>
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="panel-content">
+      <div class="measure-controls">
+        <button id="measure-distance" class="measure-btn active">Distance</button>
+        <div class="unit-toggle">
+          <label>
+            <input type="radio" name="units" value="metric" checked>
+            <span>Metric</span>
+          </label>
+          <label>
+            <input type="radio" name="units" value="imperial">
+            <span>Imperial</span>
+          </label>
+        </div>
+      </div>
+      <div id="measure-result" class="measure-result">
+        <p>Click two points to measure distance</p>
+      </div>
+      <button id="clear-measurements" class="small-btn">Clear</button>
+    </div>
+  </div>
+
+  <!-- Export Panel -->
+  <div id="export-panel" class="panel hidden">
+    <div class="panel-header">
+      <h3>Export</h3>
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="panel-content">
+      <button id="export-png" class="export-btn">Export as PNG</button>
+      <button id="export-print" class="export-btn">Print</button>
+    </div>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+    <p>Loading DXF...</p>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
