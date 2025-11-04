@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Online DXF Viewer | Free, Private & No Signup</title>
+  <meta name="description" content="Learn about our free, private, and fast online DXF viewer. No signup required, just drag and drop your files. All processing is client-side, ensuring your files are never saved on our servers.">
+  <meta name="keywords" content="about dxf viewer, dxf viewer features, online cad tool, free dxf viewer, browser dxf viewer, no signup, private dxf viewer, client-side processing">
+  <link rel="stylesheet" href="/styles/main.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h1, h2 {
+      color: #1a1a1a;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e0e0e0;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/dxfv/" class="back-link">&larr; Back to the Viewer</a>
+
+    <header>
+      <h1>About Our Free Online DXF Viewer</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>What is this Tool?</h2>
+        <p>
+          This is a completely free, browser-based viewer for DXF (Drawing Exchange Format) files, a common format for CAD (Computer-Aided Design) drawings. Our mission is to provide a fast, accessible, and user-friendly tool that allows anyone to view DXF files without needing to install heavy desktop software or even create an account.
+        </p>
+        <p>
+          Whether you're an engineer, architect, designer, student, or hobbyist, this viewer gives you the power to inspect 2D and 3D drawings directly in your web browser with unparalleled ease and privacy.
+        </p>
+      </section>
+
+      <section>
+        <h2>Key Features & Benefits</h2>
+        <ul>
+          <li><strong>Free & No Signup:</strong> Access all features without any cost or the need to register an account.</li>
+          <li><strong>Instant Access:</strong> Simply drag and drop your DXF file onto the page to load it instantly.</li>
+          <li><strong>Client-Side Processing & Privacy:</strong> All file processing happens directly in your browser. Your DXF files are never uploaded to or saved on our servers, ensuring your privacy and data security.</li>
+          <li><strong>No Installation Required:</strong> Works entirely in your browser on any operating system (Windows, macOS, Linux, ChromeOS).</li>
+          <li><strong>Fast & Responsive:</strong> Built with modern web technologies (Three.js and WebGL) for smooth performance and quick rendering.</li>
+          <li><strong>Layer Management:</strong> Easily toggle the visibility of different layers within your DXF file.</li>
+          <li><strong>3D View Controls:</strong> Orbit, pan, and zoom to inspect your model from any angle.</li>
+          <li><strong>ViewCube Navigation:</strong> Quickly snap to standard orthographic views (top, front, left, etc.).</li>
+          <li><strong>Export Options:</strong> Export your current view to PNG (with or without a transparent background) or SVG for use in other documents.</li>
+          <li><strong>Print Functionality:</strong> Directly print the current view of your model.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What are DXF Files?</h2>
+        <p>
+          DXF is a CAD data file format developed by Autodesk. It was created to enable interoperability between AutoCAD and other software programs. Because of its open nature, it has become a widely used standard for exchanging drawing data between different CAD applications. DXF files can contain both 2D and 3D design information.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; <span id="current-year"></span> DXF Viewer. <a href="/dxfv/">Return to Viewer</a>.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -15,12 +15,12 @@
     gtag('config', 'G-QVEGXYL9Q9');
   </script>
 </head>
-<body>
+<body class="no-scroll">
   <!-- Top Toolbar -->
   <div id="toolbar">
     <div class="toolbar-left">
       <h1>DXF Viewer</h1>
-      <span id="file-name"></span>
+      <span id="file-name" class="hidden"></span>
     </div>
     <div class="toolbar-right">
       <button id="btn-layers" class="toolbar-btn" title="Layers">
@@ -154,13 +154,19 @@
         </div>
 
         <div class="help-section">
+          <h3>More Information</h3>
+          <a href="/dxfv/about.html" class="shortcut-item" style="text-decoration: none; color: inherit;">
+            <kbd>Info</kbd>
+            <span>About this DXF Viewer</span>
+          </a>
+        </div>
+
+        <div class="help-section">
           <h3>Touch Gestures (Mobile)</h3>
           <div class="shortcut-item">
-            <span class="touch-icon">👆</span>
             <span>One finger drag to rotate</span>
           </div>
           <div class="shortcut-item">
-            <span class="touch-icon">✌️</span>
             <span>Two finger pinch to zoom</span>
           </div>
         </div>
@@ -182,6 +188,13 @@
     <p>Loading DXF...</p>
   </div>
 
+  <footer style="text-align: center; padding: 1rem; font-size: 0.85rem; color: #777;">
+    <p>&copy; <span id="current-year-index"></span> DXF Viewer. <a href="/dxfv/about.html" style="color: #007bff; text-decoration: none;">About</a></p>
+  </footer>
+
   <script type="module" src="/src/main.js"></script>
+  <script>
+    document.getElementById('current-year-index').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
