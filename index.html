@@ -45,6 +45,10 @@
           <path d="M3 21v-5h5"></path>
         </svg>
       </button>
+      <div class="view-toggle">
+        <button id="btn-view-3d" class="view-toggle-btn active" title="3D View">3D</button>
+        <button id="btn-view-2d" class="view-toggle-btn" title="2D View">2D</button>
+      </div>
       <button id="btn-help" class="toolbar-btn" title="Help (H)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"></circle>
@@ -142,6 +146,20 @@
           <div class="shortcut-item">
             <kbd>Esc</kbd>
             <span>Close all panels</span>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3>View Modes</h3>
+          <div class="shortcut-item">
+            <kbd>V</kbd>
+            <span>Toggle 3D/2D view mode</span>
+          </div>
+          <div class="shortcut-item">
+            <span>3D Mode: Full orbital camera controls</span>
+          </div>
+          <div class="shortcut-item">
+            <span>2D Mode: Top-down orthographic view (pan/zoom only)</span>
           </div>
         </div>
 

@@ -24,6 +24,11 @@ class DXFViewer {
     this.btnExport = document.getElementById('btn-export');
     this.btnReset = document.getElementById('btn-reset');
     this.btnHelp = document.getElementById('btn-help');
+    this.btnView3D = document.getElementById('btn-view-3d');
+    this.btnView2D = document.getElementById('btn-view-2d');
+
+    // View mode state
+    this.viewMode = '3D';
 
     // Initialize modules
     this.scene = new Scene(this.container);
@@ -147,6 +152,15 @@ class DXFViewer {
     this.btnReset.addEventListener('click', () => {
       this.scene.resetView();
     });
+
+    // View toggle buttons
+    this.btnView3D.addEventListener('click', () => {
+      this.setViewMode('3D');
+    });
+
+    this.btnView2D.addEventListener('click', () => {
+      this.setViewMode('2D');
+    });
   }
 
   setupPanels() {
@@ -205,6 +219,24 @@ class DXFViewer {
   toggleHelp() {
     this.helpOverlay.classList.toggle('hidden');
     this.btnHelp.classList.toggle('active');
+  }
+
+  setViewMode(mode) {
+    if (this.viewMode === mode) return;
+    
+    this.viewMode = mode;
+    
+    // Update button states
+    if (mode === '3D') {
+      this.btnView3D.classList.add('active');
+      this.btnView2D.classList.remove('active');
+    } else {
+      this.btnView3D.classList.remove('active');
+      this.btnView2D.classList.add('active');
+    }
+    
+    // Update scene view mode
+    this.scene.setViewMode(mode);
   }
 
   async loadFile(file) {

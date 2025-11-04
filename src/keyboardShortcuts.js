@@ -8,6 +8,7 @@ export class KeyboardShortcuts {
       'e': () => this.togglePanel('export'), // Toggle export
       'h': () => this.viewer.toggleHelp(), // Toggle help
       '?': () => this.viewer.toggleHelp(), // Toggle help
+      'v': () => this.toggleViewMode(), // Toggle 3D/2D view
       'Escape': () => this.closeAllPanels(), // Close all panels
     };
 
@@ -51,5 +52,10 @@ export class KeyboardShortcuts {
     if (helpOverlay && !helpOverlay.classList.contains('hidden')) {
       this.viewer.toggleHelp();
     }
+  }
+
+  toggleViewMode() {
+    const newMode = this.viewer.viewMode === '3D' ? '2D' : '3D';
+    this.viewer.setViewMode(newMode);
   }
 }

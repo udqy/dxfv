@@ -7,11 +7,14 @@ export class Scene {
     this.container = container;
     this.scene = null;
     this.camera = null;
+    this.orthographicCamera = null;
+    this.perspectiveCamera = null;
     this.renderer = null;
     this.controls = null;
     this.currentModel = null;
     this.animationId = null;
     this.viewCube = null;
+    this.viewMode = '3D';
 
     this.init();
   }
@@ -21,14 +24,21 @@ export class Scene {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0xf5f7fa);
 
-    // Camera
-    this.camera = new THREE.PerspectiveCamera(
+    // Cameras
+    this.perspectiveCamera = new THREE.PerspectiveCamera(
       45,
       this.container.clientWidth / this.container.clientHeight,
       0.1,
       10000
     );
-    this.camera.position.set(100, 100, 100);
+    this.perspectiveCamera.position.set(100, 100, 100);
+
+    this.orthographicCamera = new THREE.OrthographicCamera(
+      -100, 100, 100, -100, 0.1, 10000
+    );
+    this.orthographicCamera.position.set(0, 0, 100);
+
+    this.camera = this.perspectiveCamera;
 
     // Renderer
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -85,8 +95,20 @@ export class Scene {
   }
 
   onWindowResize() {
-    this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
-    this.camera.updateProjectionMatrix();
+    const aspect = this.container.clientWidth / this.container.clientHeight;
+    
+    // Update perspective camera
+    this.perspectiveCamera.aspect = aspect;
+    this.perspectiveCamera.updateProjectionMatrix();
+    
+    // Update orthographic camera
+    const frustumSize = 200;
+    this.orthographicCamera.left = -frustumSize * aspect / 2;
+    this.orthographicCamera.right = frustumSize * aspect / 2;
+    this.orthographicCamera.top = frustumSize / 2;
+    this.orthographicCamera.bottom = -frustumSize / 2;
+    this.orthographicCamera.updateProjectionMatrix();
+    
     this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
   }
 
@@ -191,5 +213,56 @@ export class Scene {
 
   getCurrentModel() {
     return this.currentModel;
+  }
+
+  setViewMode(mode) {
+    if (this.viewMode === mode) return;
+    
+    this.viewMode = mode;
+    
+    if (mode === '2D') {
+      // Switch to 2D orthographic view
+      this.camera = this.orthographicCamera;
+      this.controls.object = this.orthographicCamera;
+      
+      // Position camera for top-down view
+      if (this.currentModel) {
+        const box = new THREE.Box3().setFromObject(this.currentModel);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        
+        const maxDim = Math.max(size.x, size.y);
+        const aspect = this.container.clientWidth / this.container.clientHeight;
+        
+        this.orthographicCamera.left = -maxDim * aspect / 2;
+        this.orthographicCamera.right = maxDim * aspect / 2;
+        this.orthographicCamera.top = maxDim / 2;
+        this.orthographicCamera.bottom = -maxDim / 2;
+        this.orthographicCamera.position.set(center.x, center.y, center.z + maxDim);
+        this.orthographicCamera.lookAt(center);
+      }
+      
+      // Disable rotation for 2D view
+      this.controls.enableRotate = false;
+      this.controls.enablePan = true;
+      this.controls.enableZoom = true;
+      
+    } else {
+      // Switch to 3D perspective view
+      this.camera = this.perspectiveCamera;
+      this.controls.object = this.perspectiveCamera;
+      
+      // Re-enable rotation for 3D view
+      this.controls.enableRotate = true;
+      this.controls.enablePan = true;
+      this.controls.enableZoom = true;
+      
+      // Reset to a good 3D view if we have a model
+      if (this.currentModel) {
+        this.fitCameraToModel(this.currentModel);
+      }
+    }
+    
+    this.controls.update();
   }
 }

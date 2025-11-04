@@ -159,6 +159,44 @@ body {
   stroke: white;
 }
 
+/* View Toggle */
+.view-toggle {
+  display: flex;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  min-width: 32px;
+}
+
+.view-toggle-btn:hover {
+  background: var(--hover-color);
+}
+
+.view-toggle-btn.active {
+  background: var(--active-color);
+  color: white;
+}
+
+.view-toggle-btn:first-child {
+  border-right: 1px solid var(--border-color);
+}
+
+.view-toggle-btn:first-child.active {
+  border-right-color: var(--active-color);
+}
+
 /* Panels */
 .panel {
   position: fixed;

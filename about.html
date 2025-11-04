@@ -3,9 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - Online DXF Viewer | Free, Private & No Signup</title>
-  <meta name="description" content="Learn about our free, private, and fast online DXF viewer. No signup required, just drag and drop your files. All processing is client-side, ensuring your files are never saved on our servers.">
-  <meta name="keywords" content="about dxf viewer, dxf viewer features, online cad tool, free dxf viewer, browser dxf viewer, no signup, private dxf viewer, client-side processing">
+  <title>Free Online DXF Viewer & Converter | 3D/2D Views | DXF to PDF Export</title>
+  <meta name="description" content="Free online DXF viewer with 3D/2D toggle, layer control, and export options. Convert DXF to PDF, SVG, PNG instantly. No signup required, 100% private client-side processing.">
+  <meta name="keywords" content="free dxf viewer, online dxf viewer, dxf to pdf free, dxf converter, dxf to svg, dxf to png, cad viewer online, 3d 2d dxf viewer, free dxf export, no signup dxf viewer, client-side dxf converter, autocad viewer free, dxf file viewer online, cad file converter, engineering drawing viewer">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free Online DXF Viewer & Converter | 3D/2D Views | DXF to PDF Export">
+  <meta property="og:description" content="View and convert DXF files online for free. 3D/2D views, layer control, export to PDF, SVG, PNG. No signup, 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yoursite.com/dxfv/about.html">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yoursite.com/dxfv/about.html">
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Free Online DXF Viewer & Converter",
+    "description": "Free online DXF viewer with 3D/2D toggle, layer control, and export options. Convert DXF to PDF, SVG, PNG instantly.",
+    "url": "https://yoursite.com/dxfv/",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "3D/2D View Toggle",
+      "Layer Management",
+      "DXF to PDF Conversion",
+      "DXF to SVG Export",
+      "DXF to PNG Export",
+      "Client-side Processing",
+      "No Signup Required"
+    ]
+  }
+  </script>
+  
   <link rel="stylesheet" href="/styles/main.css">
   <style>
     body {
@@ -17,7 +54,7 @@
       padding: 0;
     }
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 2rem;
       background-color: #fff;
@@ -29,6 +66,11 @@
       border-bottom: 1px solid #e0e0e0;
       padding-bottom: 0.5rem;
       margin-top: 1.5rem;
+    }
+    h3 {
+      color: #2c3e50;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
     }
     a {
       color: #007bff;
@@ -50,6 +92,140 @@
       font-size: 0.9rem;
       color: #777;
     }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .feature-item {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #007bff;
+    }
+    
+    .feature-item h3 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    
+    /* Export Grid */
+    .export-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .export-item {
+      background: #fff;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .export-item h3 {
+      margin-top: 0;
+      color: #28a745;
+    }
+    
+    /* Use Case Grid */
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .use-case {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #28a745;
+    }
+    
+    .use-case h3 {
+      margin-top: 0;
+      color: #28a745;
+    }
+    
+    /* Conversion Table */
+    .conversion-table {
+      margin: 2rem 0;
+      overflow-x: auto;
+    }
+    
+    .conversion-table table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .conversion-table th,
+    .conversion-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .conversion-table th {
+      background: #007bff;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .conversion-table tr:hover {
+      background: #f8f9fa;
+    }
+    
+    /* FAQ Section */
+    .faq {
+      margin: 1.5rem 0;
+    }
+    
+    .faq-item {
+      background: #f8f9fa;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-left: 4px solid #17a2b8;
+    }
+    
+    .faq-item h3 {
+      margin-top: 0;
+      color: #17a2b8;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      
+      .feature-grid,
+      .export-grid,
+      .use-case-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .conversion-table {
+        font-size: 0.9rem;
+      }
+      
+      .conversion-table th,
+      .conversion-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -57,46 +233,195 @@
     <a href="/dxfv/" class="back-link">&larr; Back to the Viewer</a>
 
     <header>
-      <h1>About Our Free Online DXF Viewer</h1>
+      <h1>Free Online DXF Viewer & Converter | 3D/2D Views & Export Tools</h1>
     </header>
 
     <main>
       <section>
         <h2>What is this Tool?</h2>
         <p>
-          This is a completely free, browser-based viewer for DXF (Drawing Exchange Format) files, a common format for CAD (Computer-Aided Design) drawings. Our mission is to provide a fast, accessible, and user-friendly tool that allows anyone to view DXF files without needing to install heavy desktop software or even create an account.
+          This is a completely <strong>free online DXF viewer and converter</strong> that works entirely in your browser. As a comprehensive CAD file viewer, it supports both 2D and 3D DXF files with advanced viewing controls and multiple export options. Our mission is to provide the best <strong>free DXF to PDF converter</strong> and viewer without requiring any software installation or account registration.
         </p>
         <p>
-          Whether you're an engineer, architect, designer, student, or hobbyist, this viewer gives you the power to inspect 2D and 3D drawings directly in your web browser with unparalleled ease and privacy.
+          Whether you're an engineer needing a quick <strong>DXF to PDF free online</strong> conversion, an architect reviewing 3D models, a student sharing CAD drawings, or a hobbyist exploring design files, this tool provides professional-grade DXF viewing and conversion capabilities with unmatched privacy and convenience.
         </p>
       </section>
 
       <section>
-        <h2>Key Features & Benefits</h2>
+        <h2>Why Choose Our Free DXF Viewer?</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h3>🚀 Instant DXF Viewing</h3>
+            <p>No software installation required. Open DXF files directly in your browser with drag-and-drop simplicity.</p>
+          </div>
+          <div class="feature-item">
+            <h3>🔒 100% Private & Secure</h3>
+            <p>All processing happens client-side. Your DXF files never leave your device, ensuring complete privacy.</p>
+          </div>
+          <div class="feature-item">
+            <h3>💰 Truly Free</h3>
+            <p>No hidden costs, premium features, or account requirements. All DXF viewing and conversion tools are completely free.</p>
+          </div>
+          <div class="feature-item">
+            <h3>🌐 Cross-Platform</h3>
+            <p>Works on Windows, macOS, Linux, ChromeOS, and mobile devices. Access your DXF files anywhere.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Advanced Viewing Features</h2>
         <ul>
-          <li><strong>Free & No Signup:</strong> Access all features without any cost or the need to register an account.</li>
-          <li><strong>Instant Access:</strong> Simply drag and drop your DXF file onto the page to load it instantly.</li>
-          <li><strong>Client-Side Processing & Privacy:</strong> All file processing happens directly in your browser. Your DXF files are never uploaded to or saved on our servers, ensuring your privacy and data security.</li>
-          <li><strong>No Installation Required:</strong> Works entirely in your browser on any operating system (Windows, macOS, Linux, ChromeOS).</li>
-          <li><strong>Fast & Responsive:</strong> Built with modern web technologies (Three.js and WebGL) for smooth performance and quick rendering.</li>
-          <li><strong>Layer Management:</strong> Easily toggle the visibility of different layers within your DXF file.</li>
-          <li><strong>3D View Controls:</strong> Orbit, pan, and zoom to inspect your model from any angle.</li>
-          <li><strong>ViewCube Navigation:</strong> Quickly snap to standard orthographic views (top, front, left, etc.).</li>
-          <li><strong>Export Options:</strong> Export your current view to PNG (with or without a transparent background) or SVG for use in other documents.</li>
-          <li><strong>Print Functionality:</strong> Directly print the current view of your model.</li>
+          <li><strong>3D/2D View Toggle:</strong> Seamlessly switch between 3D orbital view and 2D orthographic top-down view with a single click or press 'V'.</li>
+          <li><strong>Layer Management:</strong> Toggle individual layers on/off to focus on specific components of your DXF drawing.</li>
+          <li><strong>3D Navigation Controls:</strong> Full orbit, pan, and zoom capabilities in 3D mode for inspecting models from any angle.</li>
+          <li><strong>2D Precision View:</strong> Orthographic top-down view in 2D mode with pan and zoom only for technical drawing accuracy.</li>
+          <li><strong>ViewCube Navigation:</strong> Quick access to standard orthographic views (top, front, left, right, back, bottom).</li>
+          <li><strong>Keyboard Shortcuts:</strong> Efficient workflow with shortcuts for view toggle (V), layers (L), export (E), and more.</li>
+          <li><strong>Touch Gesture Support:</strong> Mobile-friendly with pinch-to-zoom and drag-to-rotate gestures.</li>
         </ul>
+      </section>
+
+      <section>
+        <h2>Free DXF Export & Conversion Tools</h2>
+        <p>Beyond viewing, our tool serves as a comprehensive <strong>free DXF converter</strong> with multiple export options:</p>
+        
+        <div class="export-grid">
+          <div class="export-item">
+            <h3>📄 DXF to PDF Free Online</h3>
+            <p>Convert your DXF drawings to universally compatible PDF documents. Perfect for sharing, printing, and documentation. Our <strong>DXF to PDF converter</strong> preserves vector quality and works entirely in your browser.</p>
+          </div>
+          <div class="export-item">
+            <h3>🎨 DXF to SVG Vector Export</h3>
+            <p>Export DXF files as scalable vector graphics (SVG) for web use, presentations, or further editing in vector software. Maintains crisp quality at any size.</p>
+          </div>
+          <div class="export-item">
+            <h3>🖼️ DXF to PNG High-Resolution</h3>
+            <p>Create high-quality raster images from your DXF files. Choose transparent or solid background options. Ideal for presentations, documentation, and web use.</p>
+          </div>
+          <div class="export-item">
+            <h3>🖨️ Direct Printing</h3>
+            <p>Print your DXF drawings directly from the browser without conversion. Maintain scale and quality for professional documentation.</p>
+          </div>
+        </div>
+
+        <div class="conversion-table">
+          <h3>DXF Conversion Comparison</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Export Format</th>
+                <th>Best For</th>
+                <th>Quality</th>
+                <th>Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PDF</strong></td>
+                <td>Documentation, Sharing</td>
+                <td>Vector (Perfect)</td>
+                <td>Technical drawings, Manuals</td>
+              </tr>
+              <tr>
+                <td><strong>SVG</strong></td>
+                <td>Web, Presentations</td>
+                <td>Vector (Perfect)</td>
+                <td>Websites, Presentations</td>
+              </tr>
+              <tr>
+                <td><strong>PNG</strong></td>
+                <td>Images, Documents</td>
+                <td>Raster (High)</td>
+                <td>Documents, Social media</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Use Cases & Applications</h2>
+        <div class="use-case-grid">
+          <div class="use-case">
+            <h3>🏗️ Engineering & Manufacturing</h3>
+            <p>Review technical drawings, manufacturing plans, and engineering schematics. Use our <strong>DXF to PDF converter</strong> for documentation and sharing with stakeholders.</p>
+          </div>
+          <div class="use-case">
+            <h3>🏢 Architecture & Construction</h3>
+            <p>Examine architectural plans, building layouts, and construction drawings. Toggle between 3D and 2D views for different perspectives.</p>
+          </div>
+          <div class="use-case">
+            <h3>🎓 Education & Learning</h3>
+            <p>Perfect for students and educators studying CAD, engineering, or design. No software installation required on school computers.</p>
+          </div>
+          <div class="use-case">
+            <h3>🔧 Hobbyists & DIY</h3>
+            <p>View 3D printing files, CNC cutting plans, and DIY project designs. Export as PNG for sharing on social media or forums.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Technical Specifications</h2>
+        <ul>
+          <li><strong>Supported Format:</strong> DXF (Drawing Exchange Format)</li>
+          <li><strong>Viewing Modes:</strong> 3D Perspective, 2D Orthographic</li>
+          <li><strong>Export Formats:</strong> PDF, SVG, PNG (with/without transparency)</li>
+          <li><strong>Technology:</strong> Three.js, WebGL, HTML5</li>
+          <li><strong>Processing:</strong> 100% Client-side (no server uploads)</li>
+          <li><strong>Browser Support:</strong> All modern browsers (Chrome, Firefox, Safari, Edge)</li>
+          <li><strong>Mobile Support:</strong> Touch gestures, responsive design</li>
+          <li><strong>File Size:</strong> Handles large DXF files efficiently</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <h3>How to convert DXF to PDF free online?</h3>
+            <p>Simply upload your DXF file to our viewer, then click the export button and select "Export as PDF". Our <strong>free DXF to PDF converter</strong> works entirely in your browser without any software installation.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Is this DXF viewer really free?</h3>
+            <p>Yes! All features including 3D/2D viewing, layer control, and all export options (DXF to PDF, SVG, PNG) are completely free with no hidden costs or premium features.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Can I export DXF as SVG?</h3>
+            <p>Absolutely! Our tool includes a <strong>DXF to SVG converter</strong> that preserves vector quality, making it perfect for web use and further editing in vector software.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What's the difference between 3D and 2D view modes?</h3>
+            <p>3D mode provides full orbital camera controls for inspecting models from any angle. 2D mode offers a top-down orthographic view with pan and zoom only, ideal for technical drawing review.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Are my DXF files uploaded to your servers?</h3>
+            <p>No. All processing happens client-side in your browser. Your files never leave your device, ensuring complete privacy and security.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Can I use this on mobile devices?</h3>
+            <p>Yes! Our DXF viewer is fully responsive and supports touch gestures for mobile and tablet use, including pinch-to-zoom and drag controls.</p>
+          </div>
+        </div>
       </section>
 
       <section>
         <h2>What are DXF Files?</h2>
         <p>
-          DXF is a CAD data file format developed by Autodesk. It was created to enable interoperability between AutoCAD and other software programs. Because of its open nature, it has become a widely used standard for exchanging drawing data between different CAD applications. DXF files can contain both 2D and 3D design information.
+          DXF (Drawing Exchange Format) is a CAD data file format developed by Autodesk for interoperability between AutoCAD and other software programs. Due to its open nature, DXF has become the universal standard for exchanging drawing data between different CAD applications. DXF files can contain both 2D technical drawings and 3D models, making them essential for engineering, architecture, and design workflows.
+        </p>
+        <p>
+          Our <strong>online DXF viewer</strong> supports the full range of DXF capabilities, from simple 2D technical drawings to complex 3D assemblies, with advanced export options including our popular <strong>DXF to PDF free converter</strong>.
         </p>
       </section>
     </main>
 
     <footer>
-      <p>&copy; <span id="current-year"></span> DXF Viewer. <a href="/dxfv/">Return to Viewer</a>.</p>
+      <p>&copy; <span id="current-year"></span> DXF Viewer. <a href="/dxfv/">Return to Viewer</a> | <a href="/dxfv/about.html">About</a></p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+        Free Online DXF Viewer & Converter | DXF to PDF | DXF to SVG | DXF to PNG | 3D/2D Views
+      </p>
     </footer>
   </div>
 
