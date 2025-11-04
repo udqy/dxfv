@@ -222,6 +222,7 @@ class DXFViewer {
       // Update UI
       this.currentFileName = file.name;
       this.fileNameDisplay.textContent = file.name;
+      this.fileNameDisplay.classList.remove('hidden');
 
       // Update layers
       this.layerManager.updateLayerList();
@@ -233,6 +234,7 @@ class DXFViewer {
     } catch (error) {
       console.error('Error loading DXF:', error);
       alert(`Failed to load DXF file: ${error.message}`);
+      this.fileNameDisplay.classList.add('hidden');
 
       // Show drop zone again
       this.dropZone.classList.remove('hidden');

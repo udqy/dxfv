@@ -181,106 +181,93 @@ export class ViewCube {
   setupInteraction() {
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    let mouseDownTime = 0;
 
-    this.renderer.domElement.addEventListener('click', (event) => {
+    const onMouseDown = (event) => {
+      isDragging = true;
+      mouseDownTime = Date.now();
+      previousMousePosition = { x: event.clientX, y: event.clientY };
+    };
+
+    const onMouseUp = (event) => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      const dragDuration = Date.now() - mouseDownTime;
+      const dragDistance = Math.sqrt(
+        Math.pow(event.clientX - previousMousePosition.x, 2) +
+        Math.pow(event.clientY - previousMousePosition.y, 2)
+      );
+
+      // If the drag was short in time and distance, treat it as a click
+      if (dragDuration < 200 && dragDistance < 5) {
+        handleClick(event);
+      }
+    };
+
+    const onMouseMove = (event) => {
+      if (!isDragging) return;
+
+      const deltaX = event.clientX - previousMousePosition.x;
+      const deltaY = event.clientY - previousMousePosition.y;
+
+      // Get the vector from the camera to the target
+      const offset = new THREE.Vector3().subVectors(
+        this.mainCamera.position,
+        this.controls.target
+      );
+
+      // Create a quaternion for the horizontal rotation (around the world's Y axis)
+      const quatX = new THREE.Quaternion().setFromAxisAngle(
+        new THREE.Vector3(0, 1, 0),
+        -deltaX * 0.01
+      );
+
+      // Create a quaternion for the vertical rotation (around the camera's local X axis)
+      const cameraXAxis = new THREE.Vector3(1, 0, 0).applyQuaternion(this.mainCamera.quaternion);
+      const quatY = new THREE.Quaternion().setFromAxisAngle(
+        cameraXAxis,
+        -deltaY * 0.01
+      );
+
+      // Apply the rotations to the offset vector
+      offset.applyQuaternion(quatX).applyQuaternion(quatY);
+
+      // Position the camera at the new offset from the target
+      this.mainCamera.position.copy(this.controls.target).add(offset);
+
+      // Ensure the camera's "up" vector is correct
+      this.mainCamera.up.applyQuaternion(quatX).applyQuaternion(quatY);
+
+      // Look at the target
+      this.mainCamera.lookAt(this.controls.target);
+
+      // Update the controls to reflect the new state
+      this.controls.update();
+
+      previousMousePosition = { x: event.clientX, y: event.clientY };
+    };
+
+    const handleClick = (event) => {
       const rect = this.renderer.domElement.getBoundingClientRect();
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
       raycaster.setFromCamera(mouse, this.camera);
-      const intersects = raycaster.intersectObject(this.cube);
+      const intersects = raycaster.intersectObject(this.cube, false);
 
-      if (intersects.length > 0) {
-        // Get the camera direction (view direction from camera to cube)
-        const cameraDirection = new THREE.Vector3();
-        this.camera.getWorldDirection(cameraDirection);
-
-        // Get intersection point in world space
-        const intersectPoint = intersects[0].point.clone();
-
-        // Since cube is at origin in its scene, the point is already relative to cube center
-        // Just need to account for the cube's rotation
-        const inverseQuaternion = this.cube.quaternion.clone().invert();
-        const localPoint = intersectPoint.clone().applyQuaternion(inverseQuaternion);
-
-        // Determine which face based on which coordinate has the largest absolute value
-        const absX = Math.abs(localPoint.x);
-        const absY = Math.abs(localPoint.y);
-        const absZ = Math.abs(localPoint.z);
-
-        let faceIndex;
-        const threshold = 0.4; // Reduced threshold for better detection
-
-        if (absX >= absY && absX >= absZ) {
-          // X axis (Red)
-          faceIndex = localPoint.x > 0 ? 0 : 1; // Right : Left
-        } else if (absY >= absX && absY >= absZ) {
-          // Y axis (Green)
-          faceIndex = localPoint.y > 0 ? 2 : 3; // Top : Bottom
-        } else {
-          // Z axis (Blue)
-          faceIndex = localPoint.z > 0 ? 4 : 5; // Front : Back
-        }
-
-        console.log('Clicked face:', this.faceData[faceIndex].name, 'local point:', localPoint);
+      if (intersects.length > 0 && intersects[0].face) {
+        const faceIndex = intersects[0].face.materialIndex;
         this.snapToView(faceIndex);
       }
-    });
+    };
 
-    // Hover effect
-    this.renderer.domElement.addEventListener('mousemove', (event) => {
-      const rect = this.renderer.domElement.getBoundingClientRect();
-      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-      raycaster.setFromCamera(mouse, this.camera);
-      const intersects = raycaster.intersectObject(this.cube);
-
-      this.renderer.domElement.style.opacity = intersects.length > 0 ? '0.8' : '1';
-    });
-
-    // Drag functionality
-    this.element.addEventListener('mousedown', (e) => {
-      // Only start drag if clicking on the element but not on the canvas (face click)
-      if (e.target !== this.renderer.domElement) {
-        this.isDragging = true;
-        this.dragStart.x = e.clientX;
-        this.dragStart.y = e.clientY;
-        this.element.style.cursor = 'move';
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      if (this.isDragging) {
-        const dx = e.clientX - this.dragStart.x;
-        const dy = e.clientY - this.dragStart.y;
-
-        // Update position (using bottom/right positioning)
-        this.position.right = Math.max(0, this.position.right - dx);
-        this.position.bottom = Math.max(0, this.position.bottom + dy);
-
-        // Clamp to viewport
-        const maxRight = window.innerWidth - this.size;
-        const maxBottom = window.innerHeight - this.size;
-
-        this.position.right = Math.min(maxRight, Math.max(0, this.position.right));
-        this.position.bottom = Math.min(maxBottom, Math.max(0, this.position.bottom));
-
-        this.element.style.right = `${this.position.right}px`;
-        this.element.style.bottom = `${this.position.bottom}px`;
-
-        this.dragStart.x = e.clientX;
-        this.dragStart.y = e.clientY;
-      }
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (this.isDragging) {
-        this.isDragging = false;
-        this.element.style.cursor = 'pointer';
-      }
-    });
+    this.renderer.domElement.addEventListener('mousedown', onMouseDown);
+    this.renderer.domElement.addEventListener('mouseup', onMouseUp);
+    this.renderer.domElement.addEventListener('mousemove', onMouseMove);
+    this.renderer.domElement.addEventListener('mouseleave', () => { isDragging = false; });
   }
 
   snapToView(faceIndex) {
@@ -344,29 +331,52 @@ export class ViewCube {
   animate() {
     requestAnimationFrame(() => this.animate());
 
-    // Sync rotation with main camera
-    this.cube.quaternion.copy(this.mainCamera.quaternion);
+    // Calculate the direction vector from the main camera to its target
+    const direction = new THREE.Vector3().subVectors(
+      this.mainCamera.position,
+      this.controls.target
+    );
 
-    // Update label positions
+    // Position the view cube's camera along that direction vector
+    const distance = 4; // A fixed distance for the view cube camera
+    this.camera.position.copy(direction.normalize().multiplyScalar(distance));
+
+    // Copy the main camera's "up" direction
+    this.camera.up.copy(this.mainCamera.up);
+
+    // Point the view cube's camera back at the center of its scene
+    this.camera.lookAt(this.scene.position);
+
+    // Update label visibility and position
     this.updateLabels();
 
+    // Render the view cube scene
     this.renderer.render(this.scene, this.camera);
   }
 
   updateLabels() {
-    this.labels.forEach((label, index) => {
+    this.labels.forEach((label) => {
       const position = label.userData.position.clone();
-      position.applyQuaternion(this.cube.quaternion);
+      // Project the label's 3D position to 2D screen space
       position.project(this.camera);
 
+      // Calculate the screen coordinates
       const x = (position.x * 0.5 + 0.5) * this.size;
       const y = (-position.y * 0.5 + 0.5) * this.size;
 
+      // Position the label element
       label.style.left = `${x - 7}px`;
       label.style.top = `${y - 7}px`;
 
-      // Hide label if it's behind
-      label.style.display = position.z < 1 ? 'block' : 'none';
+      // Hide the label if it's behind the cube
+      // We check the z-coordinate in projected space. If it's > 1, it's clipped (behind the camera).
+      // We also add a check to see if the label is facing away from the camera.
+      const eye = this.camera.position.clone().normalize();
+      const labelDir = label.userData.position.clone().normalize();
+      const dot = eye.dot(labelDir);
+
+      // Hide if behind camera or facing away (dot product < threshold)
+      label.style.display = (position.z > 1 || dot < -0.5) ? 'none' : 'block';
     });
   }
 
