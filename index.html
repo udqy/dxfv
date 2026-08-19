@@ -3,7 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DXF Viewer</title>
+  <title>Free Online DXF Viewer – View & Convert DXF to PDF, SVG, PNG</title>
+  <meta name="description" content="Free browser-based DXF viewer with 3D/2D toggle, layer control, and export to PDF, SVG, PNG. No signup, no upload — 100% private client-side processing.">
+  <meta name="keywords" content="dxf viewer, online dxf viewer, dxf to pdf, dxf converter, dxf to svg, dxf to png, cad viewer, free cad viewer, 3d dxf viewer, autocad viewer">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Online DXF Viewer – View & Convert DXF Files">
+  <meta property="og:description" content="View and convert DXF files in your browser. 3D/2D views, layer control, export to PDF, SVG, PNG. No signup, 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://udqy.github.io/dxfv/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Online DXF Viewer – View & Convert DXF Files">
+  <meta name="twitter:description" content="View and convert DXF files in your browser. 3D/2D views, layer control, export to PDF, SVG, PNG. No signup, 100% private.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://udqy.github.io/dxfv/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "DXF Viewer",
+    "url": "https://udqy.github.io/dxfv/",
+    "description": "Free browser-based DXF viewer with 3D/2D toggle, layer control, and export to PDF, SVG, PNG. No signup, no upload — 100% private client-side processing.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern browser with WebGL support",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "3D/2D View Toggle",
+      "Layer Management",
+      "DXF to PDF Export",
+      "DXF to SVG Export",
+      "DXF to PNG Export",
+      "Client-side Processing",
+      "No Signup Required",
+      "ViewCube Navigation",
+      "Keyboard Shortcuts",
+      "Touch Gesture Support"
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="/styles/main.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVEGXYL9Q9"></script>
@@ -60,18 +108,19 @@
   </div>
 
   <!-- Main Viewer Container -->
-  <div id="viewer"></div>
+  <main id="viewer" role="main"></main>
 
   <!-- Drag and Drop Overlay -->
   <div id="drop-zone" class="drop-zone">
     <div class="drop-content">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
         <polyline points="17 8 12 3 7 8"></polyline>
         <line x1="12" y1="3" x2="12" y2="15"></line>
       </svg>
       <h2>Drop DXF File Here</h2>
       <p>or click to browse</p>
+      <p>Free online DXF viewer &mdash; view and convert DXF to PDF, SVG, and PNG in your browser</p>
       <input type="file" id="file-input" accept=".dxf" hidden>
     </div>
   </div>

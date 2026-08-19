@@ -1,0 +1,65 @@
+# DXF Viewer
+
+> Free browser-based DXF file viewer and converter. View 2D and 3D DXF drawings, manage layers, and export to PDF, SVG, and PNG — all client-side with no server uploads.
+
+## What This Tool Does
+
+DXF Viewer is a web application that renders DXF (Drawing Exchange Format) files in the browser using Three.js and WebGL. It parses DXF files client-side and displays them as interactive 3D or 2D scenes. Users can toggle layers, switch between 3D orbital and 2D orthographic views, and export their drawings to multiple formats.
+
+All file processing happens in the browser. No files are uploaded to any server. No account or signup is required.
+
+## URL
+
+https://udqy.github.io/dxfv/
+
+## Features
+
+- **3D/2D View Toggle**: Switch between 3D perspective (orbit, pan, zoom) and 2D orthographic top-down view.
+- **Layer Management**: Show/hide individual layers from the DXF file.
+- **Export to PDF**: Convert DXF drawings to PDF documents via the browser print dialog.
+- **Export to SVG**: Export the current view as a scalable vector graphic.
+- **Export to PNG**: Export as a high-resolution raster image, with optional transparent background.
+- **Direct Print**: Print drawings directly from the browser.
+- **ViewCube**: Click cube faces to snap to standard orthographic views (top, front, left, right, back, bottom).
+- **Keyboard Shortcuts**: V (toggle view), L (layers), E (export), F/R (fit/reset), H (help).
+- **Touch Gestures**: Mobile-friendly with pinch-to-zoom and drag-to-rotate.
+- **Drag and Drop**: Drop a .dxf file onto the page to open it.
+
+## Technical Details
+
+- Built with Vite, Three.js, and dxf-parser
+- Renders using WebGL via Three.js
+- Supports lines, polylines, circles, arcs, ellipses, splines, 3D faces, points, and text entities from DXF files
+- Measurements displayed in the DXF file's native units
+- No backend — everything runs in the browser
+- Deployed on GitHub Pages
+
+## Supported DXF Entities
+
+- LINE
+- LWPOLYLINE / POLYLINE
+- CIRCLE
+- ARC
+- ELLIPSE
+- SPLINE
+- 3DFACE
+- POINT
+- TEXT / MTEXT
+- INSERT (block references)
+- DIMENSION
+
+## Use Cases
+
+- Engineers and manufacturers reviewing technical drawings
+- Architects examining building plans and layouts
+- Students studying CAD without needing AutoCAD installed
+- Hobbyists viewing 3D printing files, CNC plans, and DIY project designs
+- Anyone who needs a quick DXF to PDF/SVG/PNG conversion without installing software
+
+## Privacy
+
+Files are processed entirely in the browser using JavaScript. No data is sent to any server. The only external request is to Google Analytics for anonymous usage statistics.
+
+## Source Code
+
+https://github.com/udqy/dxfv
